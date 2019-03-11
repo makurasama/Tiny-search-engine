@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title>搜索首页</title>
+    <style>
+    	.default-theme{}
+    	#fkbx{background:rgba(0,0,0,.2);border:1px ;border-radius:50px ;position:absolute;height: 50px;margin: 0 auto;opacity: 0.4;width: 600px;}
+    	#fkbx>input{background:transparent;border:none;bottom:0;box-sizing:border-box;left:0;margin:0;outline:none;padding:0 8px;position:absolute;top:2px;width:100%}
+    	#TZA4S
+    	{
+    		display:flex;
+    		flex-direction:column;
+    		height:100%;
+    		margin:0 auto;
+    		position:relative;
+    		z-index:1;
+    		margin:auto;
+    	}
+    	#fkbx-text{
+    		color:#bbb;bottom:0;font-size:16px;left:9px;margin-top: 1px;overflow: hidden;position:absolute;right:9px;text-align: left;text-overflow: ellipsis;top:0;white-space: nowrap;
+    	}
+    	.logo{flex-shrink:0;height:200px;margin-top:45px;text-align:center;width: 272px;margin-left:auto;margin-right: auto;margin-top: 115px}
+    	.searching{flex-shrink:0;height:231px;margin-top:45px;text-align:center;width: 600px;margin-right: auto;margin-left: auto}
+  	</style>
+    <script type = "text/javascript" src = "jquery-1.11.2.min.js"></script> 
+  </head>
+
+  <body class="default-theme des-mat">
+  	<div id="TZA4S">
+  		<div class="logo">
+  			<img height="190px" width="272px" src="images.png" >	
+  		</div>
+  		<div class="searching">
+	  		<form name = "frm" action="result.html" method="get" onkeydown="if(event.keyCode==13){myFunction()} ">
+			  	<div id="fkbx" >
+				    <input id="demo" autocomplete="off" name="question" tabindex="-1" type="text" placeholder="Search here..."  value="">
+				  </div>
+			 </form>
+		  </div>
+    </div>
+    
+    <script>
+    function myFunction()
+    {
+      var x=document.getElementById("demo").value;
+      if(x=="")
+      {
+        alert("You haven't inputed your content");
+        event.preventDefault();
+      }
+      else
+      {
+        frm.question.value = $("input[id='demo']").attr("value"); 
+      }
+    }
+    </script>
+
+  </body>
+</html>

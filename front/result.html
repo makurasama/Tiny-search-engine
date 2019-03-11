@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta content="images.png" itemprop="image">
+	<title>research result</title>
+	<style>
+		.col{float:left; padding-left: 200px}
+		mark{
+			background-color:transparent;//设置背景颜色
+			color:white;//设置文字颜色
+			}
+	</style>
+	<style type="text/css">
+	A:link {text-decoration: none; color: #0707d6}
+	A:visited {text-decoration: none; color: #560956}
+	A:active {text-decoration: none;}
+	A:hover {text-decoration: underline; color: #ff0000}
+	</style>
+	<script>
+		  function myFunction()
+		  {
+		  var x=document.getElementById("demo").value;
+		  if(x=="")
+		    {
+		    alert("You haven't inputed your content");
+		    event.preventDefault();
+		    }
+		  }
+	    </script>
+ 	<script type = "text/javascript" src = "https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> 
+ 	<script type="text/javascript" src="textSearch.js"></script>
+ 	<script type="text/javascript">
+ 		
+ 		
+		//接收一个值
+		function oneValues(){
+			var result;
+			var url=window.location.search; //获取url中"?"符后的字串  
+			if(url.indexOf("?")!=-1){
+				result = decodeURI(url.substr(url.indexOf("=")+1));
+			}
+			return result;
+		}
+	
+		//post
+		function postq(question)
+ 		{
+ 			$.post("test.php",
+		    {
+		      question:question
+		    },
+		    function(data,status){
+		      //alert("数据：" + data + "\n状态：" + status);
+		      console.log(data);
+		      var item=data;
+	          //console.log(item);
+	          for(var i=0;i<item.length;i++){
+	          	var url=item[i].url;
+	          	var title=item[i].title;
+	          	var description=item[i].description;
+				var keywords=item[i].keywords;
+	            console.log(url);
+	            var a = ['<div class="block"> <a href="'+url+'"> <h3 class="title" >'+title+'</h3> <div style="display:inline-block"> <cite class="iUh30"> '+url+'</cite></div></a> <div class="content" >'+description+'</div> </div>'].join(' ');
+	            $('#req').append(a);
+
+	          }
+	          var s = ['<script>$(".content").textSearch("'+question+'"); $(".title").textSearch("'+question+'");<\/script>'].join(' ');
+	            $('#req').append(s);
+		    });
+ 		}
+ 		
+
+	</script>
+</head>
+<body>
+	<div style="margin-top:20px"></div>
+	<div>
+		<style>
+		.logo{height: 50px;width:100px;float:left;padding-left:20px;}
+		.search{float:left;padding-left:20px;background:rgba(0,0,0,0);border:1px ;border-radius:50px ;position:relative;height: 50px;margin: 0 auto;opacity: 0.5;width: 400px;border-style: solid;}
+		.search>input{background:transparent;border:none;bottom:0;box-sizing:border-box;left:5px;margin:0;outline:none;position:absolute;width:100%;padding-bottom: 20px;}
+		</style>
+		<form action="result.html" method="get" >
+			<div class="logo">
+				<a href="index.html" title="搜索首页" >
+					<img src="images.png" height="40" width="92">
+				</a>
+			</div>
+			<div class="search" style="margin-bottom:20px;">
+				<input id="demo" maxlength="2048" onkeydown="if(event.keyCode==13){myFunction()}" autocomplete="off" name="question" tabindex="-1" type="text" placeholder="Search here..." >	
+			</div>
+			<div style="background:rgba(0,0,0,.2);width:100%;height:0.5px;clear:both;margin-bottom:5px;"></div>
+		</form>
+		
+	</div>
+	
+	<div class="col">
+		<style >
+			.iUh30{font-size:14px;padding-top:0px;color: #1eb007}
+			.block{padding-top:20px; width: 600px}
+			.title{padding-bottom: 0;margin-bottom: 0;}
+		</style>
+		<script>
+			var q=oneValues();
+			$("#demo").attr("value",q);
+			//alert(oneValues());
+			var req=postq(q);
+		</script>
+		<div id="req">
+		</div>
+	</div> 
+</body>
+</html>
